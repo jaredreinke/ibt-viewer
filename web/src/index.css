@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * uPlot theme overrides.
+ *
+ * uPlot ships a light-theme default (`.u-select` is rgba(0,0,0,0.07), which
+ * is invisible on our dark purple background). Override with a purple tint
+ * + border so click-drag zoom selection is clearly visible.
+ *
+ * `.u-cursor-x` / `.u-cursor-y` are the crosshair lines — we want them
+ * muted but visible against the dark background.
+ */
+.u-select {
+  background: rgba(59, 130, 246, 0.12) !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+}
+
+.u-cursor-x,
+.u-cursor-y {
+  background: rgba(138, 173, 204, 0.45) !important;
+}
+
+/* Hide the numeric hover dot that uPlot draws on each series — it clutters
+ * the stacked-graph view and we have a right-side readout for values. */
+.u-cursor-pt {
+  display: none !important;
+}
+
+/*
+ * Global base styles.
+ *
+ * - Tabular numerals everywhere by default: lap times, speed, temps, etc.
+ *   shouldn't jitter as digits change.
+ * - Anti-aliasing for the darker background.
+ * - Thin neutral scrollbars so they don't clash with the purple theme.
+ */
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  /* Minimum width so the two-column layout stays legible when the window is
+     resized smaller — the app scrolls horizontally rather than collapsing. */
+  #root {
+    min-width: 1100px;
+  }
+
+  body {
+    font-feature-settings: "tnum", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar theming — WebKit + Firefox. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
+  }
+  *::-webkit-scrollbar      { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.15); border-radius: 4px; }
+  *::-webkit-scrollbar-track{ background: transparent; }
+}

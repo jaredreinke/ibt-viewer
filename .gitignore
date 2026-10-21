@@ -1,0 +1,17 @@
+# Node
+web/node_modules/
+web/dist/
+
+# Python venv
+sidecar/.venv/
+sidecar/__pycache__/
+sidecar/*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.suo
+*.user
